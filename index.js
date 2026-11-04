@@ -9,8 +9,7 @@ photos.forEach((photo, i) => {
   const lat = (Math.asin(y) * 180) / Math.PI;
   photo.style.setProperty("--lon", `${(i * GOLDEN_ANGLE) % 360}deg`);
   photo.style.setProperty("--lat", `${lat}deg`);
-  photo.style.setProperty("--s", sizes[i % sizes.length]);
-});
+  photo.style.setProperty("--s", sizes[i % sizes.length]);});
 
 // Fisher-Yates zamíchání
 for (let i = photos.length - 1; i > 0; i--) {
