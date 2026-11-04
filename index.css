@@ -290,14 +290,17 @@ h2 {
   width: 100%;
 }
 
-.dropdown button {
+.dropdown button,
+.dropdown a {
   flex: 1;
   min-height: 56px;
   font-family: Syne, sans-serif;
   font-size: 18px;
   letter-spacing: 2px;
   text-transform: uppercase;
-  display: inline-block;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
   text-align: center;
   font-weight: bold;
   padding: 0.75em 1.5em;
@@ -317,14 +320,16 @@ h2 {
     flex-direction: column;
   }
 
-  .dropdown button {
+  .dropdown button,
+  .dropdown a {
     flex: none;
     min-height: 48px;
     letter-spacing: 1px;
   }
 }
 
-.dropdown button::after {
+.dropdown button::after,
+.dropdown a::after {
   content: "";
   display: inline-block;
   width: 0.4em;
@@ -335,7 +340,8 @@ h2 {
   transform: translateY(-0.15em) rotate(45deg);
 }
 
-button:before {
+button:before,
+.dropdown a:before {
   transition: 0.5s all ease;
   position: absolute;
   top: 0;
@@ -349,23 +355,36 @@ button:before {
 }
 
 button:hover,
-button:focus {
+button:focus,
+.dropdown a:hover,
+.dropdown a:focus {
   color: #f6f5e9;
 }
 
 button:hover:before,
-button:focus:before {
+button:focus:before,
+.dropdown a:hover:before,
+.dropdown a:focus:before {
   transition: 0.5s all ease;
   left: 0;
   right: 0;
   opacity: 1;
 }
 
-button:active {
+button:active,
+.dropdown a:active {
   transform: scale(0.9);
 }
 
 .map {
+  margin-top: 1.5rem;
   height: 70vh;
   width: 100%;
+}
+
+@media (max-width: 768px) {
+  .map {margin-top: 1rem;
+    height: 60vh;
+    min-height: 300px;
+  }
 }

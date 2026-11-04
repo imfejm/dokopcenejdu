@@ -5,8 +5,32 @@ const czBounds = border.getBounds();
 const map = L.map(document.querySelector(".map"), {
   maxBounds: czBounds.pad(0.1),
   maxBoundsViscosity: 1,
-  minZoom: 7,
+  zoomSnap: 0.25,
+  scrollWheelZoom: false,
+  dragging: !L.Browser.mobile,
 }).fitBounds(czBounds);
+
+// Kolečko myši (a na dotykových zařízeních tažení) se v mapě aktivuje až kliknutím,
+// jinak by mapa blokovala scrollování stránky
+const lockMap = () => {
+  map.scrollWheelZoom.disable();
+  if (L.Browser.mobile) map.dragging.disable();
+};
+map.on("click", () => {
+  map.scrollWheelZoom.enable();
+  map.dragging.enable();
+});
+map.on("mouseout", lockMap);
+document.addEventListener("pointerdown", (e) => {
+  if (!map.getContainer().contains(e.target)) lockMap();
+});
+
+// Minimální zoom = celá ČR v kontejneru (na mobilu menší než dřívější pevná 7)
+const fitZoom = map.getZoom();
+map.setMinZoom(fitZoom);
+map.on("resize", () => {
+  map.setMinZoom(map.getBoundsZoom(czBounds));
+});
 
 L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png", {
   maxZoom: 18,
