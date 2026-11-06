@@ -388,3 +388,47 @@ button:active,
     min-height: 300px;
   }
 }
+
+/* Karta místa na mapě */
+.place-popup .leaflet-popup-content-wrapper {
+  padding: 0;
+  overflow: hidden;
+  border-radius: 12px;
+}
+.place-popup .leaflet-popup-content {
+  margin: 0;
+  width: 220px !important;
+}
+.place-card img {
+  display: block;
+  width: 100%;
+  height: 130px;
+  object-fit: cover;
+}
+.place-card-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  padding: 10px 12px;
+}
+.place-card-name {
+  font-family: Syne, sans-serif;
+  font-weight: 700;
+  font-size: 16px;
+}
+.place-card-go {
+  flex: none;
+  width: 34px;
+  height: 34px;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  background: #333;
+  color: #fff !important;
+  font-size: 20px;
+  text-decoration: none;
+}
+.place-card-go:hover {
+  background: #000;
+}

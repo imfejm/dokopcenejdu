@@ -57,11 +57,21 @@ L.polyline([...czBorder, czBorder[0]], {
   interactive: false,
 }).addTo(map);
 
+// Karta místa: obrázek, název a šipka; teprve šipka přesměruje na stránku místa
+const esc = (s) =>
+  String(s).replace(/[&<>"']/g, (c) => `&#${c.charCodeAt(0)};`);
+
 places.forEach((place) => {
+  const url = `/${encodeURIComponent(place.id)}`;
+  const card = `
+    <div class="place-card">
+      ${place.img ? `<img src="${esc(place.img)}" alt="${esc(place.name)}" />` : ""}
+      <div class="place-card-row">
+        <span class="place-card-name">${esc(place.name)}</span>
+        <a class="place-card-go" href="${url}" aria-label="Otevřít ${esc(place.name)}">→</a>
+      </div>
+    </div>`;
   L.marker([place.lat, place.lng], { title: place.name })
     .addTo(map)
-    .bindTooltip(place.name)
-    .on("click", () => {
-      location.href = `/${encodeURIComponent(place.id)}`;
-    });
+    .bindPopup(card, { className: "place-popup", minWidth: 220, maxWidth: 220 });
 });
