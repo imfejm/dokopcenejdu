@@ -3,21 +3,23 @@ const border = L.polygon(czBorder);
 const czBounds = border.getBounds();
 
 const map = L.map(document.querySelector(".map"), {
-  maxBounds: czBounds.pad(0.1),
+  // Nahoře je rezerva navíc, aby se mapa mohla posunout a karta místa u severní hranice se vešla
+  maxBounds: L.latLngBounds(
+    czBounds.pad(0.1).getSouthWest(),
+    [czBounds.getNorth() + 1.5, czBounds.pad(0.1).getEast()],
+  ),
   maxBoundsViscosity: 1,
   zoomSnap: 0.25,
-  scrollWheelZoom: false,
+  scrollWheelZoom: true,
   dragging: !L.Browser.mobile,
 }).fitBounds(czBounds);
 
-// Kolečko myši (a na dotykových zařízeních tažení) se v mapě aktivuje až kliknutím,
+// Kolečko myši zoomuje mapu hned; na dotykových zařízeních se tažení aktivuje až kliknutím,
 // jinak by mapa blokovala scrollování stránky
 const lockMap = () => {
-  map.scrollWheelZoom.disable();
   if (L.Browser.mobile) map.dragging.disable();
 };
 map.on("click", () => {
-  map.scrollWheelZoom.enable();
   map.dragging.enable();
 });
 map.on("mouseout", lockMap);
@@ -30,6 +32,21 @@ const fitZoom = map.getZoom();
 map.setMinZoom(fitZoom);
 map.on("resize", () => {
   map.setMinZoom(map.getBoundsZoom(czBounds));
+});
+
+// Pohled mapy (střed + zoom) se pamatuje, takže po návratu ze stránky místa je mapa stejně přiblížená
+const VIEW_KEY = "mapView";
+try {
+  const v = JSON.parse(sessionStorage.getItem(VIEW_KEY));
+  if (v && Number.isFinite(v.lat) && Number.isFinite(v.lng) && Number.isFinite(v.zoom)) {
+    map.setView([v.lat, v.lng], v.zoom, { animate: false });
+  }
+} catch (e) {}
+map.on("moveend", () => {
+  try {
+    const c = map.getCenter();
+    sessionStorage.setItem(VIEW_KEY, JSON.stringify({ lat: c.lat, lng: c.lng, zoom: map.getZoom() }));
+  } catch (e) {}
 });
 
 L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png", {
@@ -61,6 +78,17 @@ L.polyline([...czBorder, czBorder[0]], {
 const esc = (s) =>
   String(s).replace(/[&<>"']/g, (c) => `&#${c.charCodeAt(0)};`);
 
+// "50.8495258N, 14.2215303E" -> [50.8495258, 14.2215303] (S a W dávají zápornou hodnotu)
+const parseGps = (gps) => {
+  const parts = String(gps).match(/(-?\d+(?:[.,]\d+)?)\s*°?\s*([NSEW])?/gi) || [];
+  const [lat, lng] = parts.map((p) => {
+    const m = p.match(/(-?\d+(?:[.,]\d+)?)\s*°?\s*([NSEW])?/i);
+    const n = parseFloat(m[1].replace(",", "."));
+    return /[SW]/i.test(m[2] || "") ? -Math.abs(n) : n;
+  });
+  return [lat, lng];
+};
+
 places.forEach((place) => {
   const url = `/${encodeURIComponent(place.id)}`;
   const card = `
@@ -71,7 +99,7 @@ places.forEach((place) => {
         <a class="place-card-go" href="${url}" aria-label="Otevřít ${esc(place.name)}">→</a>
       </div>
     </div>`;
-  L.marker([place.lat, place.lng], { title: place.name })
+  L.marker(parseGps(place.gps), { title: place.name })
     .addTo(map)
     .bindPopup(card, { className: "place-popup", minWidth: 220, maxWidth: 220 });
 });

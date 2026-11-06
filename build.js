@@ -30,7 +30,7 @@ places.forEach((place) => {
   </head>
   <body>
     <main>
-      <p><a href="/">← Zpět na mapu</a></p>
+      <p><a href="/#map">← Zpět na mapu</a></p>
       <h1>${place.name}</h1>
       <!-- TODO fotky a popisky -->
     </main>
