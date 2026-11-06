@@ -54,7 +54,7 @@ L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png", {
   attribution: "© přispěvatelé OpenStreetMap",
 }).addTo(map);
 
-// Okolí mimo ČR překryje světlá vrstva (polygon přes celý svět s dírou ve tvaru ČR)
+// Okolí mimo ČR překryje tmavá vrstva (polygon přes celý svět s dírou ve tvaru ČR)
 const world = [
   [-90, -180],
   [-90, 180],
@@ -63,13 +63,13 @@ const world = [
 ];
 L.polygon([world, czBorder], {
   stroke: false,
-  fillColor: "#f4f1ea",
+  fillColor: "#0c0b05",
   fillOpacity: 1,
   interactive: false,
 }).addTo(map);
 
 L.polyline([...czBorder, czBorder[0]], {
-  color: "#333",
+  color: "#b9ae50",
   weight: 2,
   interactive: false,
 }).addTo(map);
@@ -89,6 +89,18 @@ const parseGps = (gps) => {
   return [lat, lng];
 };
 
+// Špendlík jako SVG, aby šla změnit barva
+const pinIcon = L.divIcon({
+  className: "map-pin",
+  html: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 25 41" width="25" height="41">
+    <path d="M12.5 0C5.6 0 0 5.6 0 12.5 0 21.9 12.5 41 12.5 41S25 21.9 25 12.5C25 5.6 19.4 0 12.5 0z" fill="#bb41ad" stroke="#fff" stroke-width="1.5"/>
+    <circle cx="12.5" cy="12.5" r="4.5" fill="#fff"/>
+  </svg>`,
+  iconSize: [25, 41],
+  iconAnchor: [12, 41],
+  popupAnchor: [0, -36],
+});
+
 places.forEach((place) => {
   const url = `/${encodeURIComponent(place.id)}`;
   const card = `
@@ -99,7 +111,7 @@ places.forEach((place) => {
         <a class="place-card-go" href="${url}" aria-label="Otevřít ${esc(place.name)}">→</a>
       </div>
     </div>`;
-  L.marker(parseGps(place.gps), { title: place.name })
+  L.marker(parseGps(place.gps), { title: place.name, icon: pinIcon })
     .addTo(map)
     .bindPopup(card, { className: "place-popup", minWidth: 220, maxWidth: 220 });
 });
