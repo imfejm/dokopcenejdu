@@ -125,5 +125,53 @@ const places = [
     gps: "49.9424719N, 15.1884044E",
     img: "img/pre/LetohradekBelveder.webp",
   },
+  {
+    id: "Macocha",
+    name: "Propast Macocha",
+    gps: "49.3732361N, 16.7298156E",
+    img: "img/pre/Macocha.webp",
+  },
+  {
+    id: "MilcanyII",
+    name: "Zřícenina hradu Milčany II (Vítkovec)",
+    gps: "50.6214275N, 14.4751825E",
+    img: "img/pre/MilcanyII.webp",
+  },
+  {
+    id: "ModlivyDul",
+    name: "Modlivý důl",
+    gps: "50.7262783N, 14.6045772E",
+    img: "img/pre/ModlivyDul.webp",
+  },
+   {
+    id: "MumlavskyVodopad",
+    name: "Mumlavský vodopád",
+    gps: "50.7706547N, 15.4532308E",
+    img: "img/pre/MumlavskyVodopad.webp",
+  },
+   {
+    id: "Neuberg",
+    name: "Zřícenina hradu Neuberg",
+    gps: "50.2551225N, 12.2068106E",
+    img: "img/pre/Neuberg.webp",
+  },
+   {
+    id: "ZriceninaOrlik",
+    name: "Zřícenina hradu Orlík",
+    gps: "49.5445419N, 15.3823381E",
+    img: "img/pre/ZriceninaOrlik.webp",
+  },
+  {
+    id: "ZlatyVoci",
+    name: "Zlatý voči – Národní památník odposlechu",
+    gps: "49.6161856N, 15.3935725E",
+    img: "img/pre/ZlatyVoci.webp",
+  },
+  {
+    id: "PanenskyTynec",
+    name: "Nedokončený kostel Panny Marie",
+    gps: "50.2961053N, 13.9167836E",
+    img: "img/pre/PanenskyTynec.webp",
+  },
   // { id: "", name: "", gps: "", img: "img/..." },
 ];
