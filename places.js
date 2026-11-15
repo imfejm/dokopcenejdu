@@ -629,5 +629,35 @@ const places = [
     gps: "48.8554194N, 16.0435561E",
     img: "img/pre/Znojmo.webp",
   },
+  {
+    id: "RychnovNadKneznou",
+    name: "Zvonice Rychnov nad Kněžnou, zámek, Kostel Nejsvětější Trojice",
+    gps: "50.1674703N, 16.2766592E",
+    img: "img/pre/RychnovNadKneznou.webp",
+  },
+  {
+    id: "HrubaSkala",
+    name: "Zámek Hrubá Skála",
+    gps: "50.5449889N, 15.1946831E",
+    img: "img/pre/HrubaSkala.webp",
+  },
+  {
+    id: "Valdstejn",
+    name: "Hrad Valdštejn",
+    gps: "50.5624189N, 15.1670817E",
+    img: "img/pre/Valdstejn.webp",
+  },
+  {
+    id: "BesedickeSkaly",
+    name: "Besedické skály",
+    gps: "50.6277675N, 15.2002686E",
+    img: "img/pre/BesedickeSkaly.webp",
+  },
+  {
+    id: "PanskaSkala",
+    name: "Panská skála",
+    gps: "50.7694897N, 14.4848639E",
+    img: "img/pre/PanskaSkala.webp",
+  },
   // { id: "", name: "", gps: "", img: "img/..." },
 ];
