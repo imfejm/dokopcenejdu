@@ -659,5 +659,35 @@ const places = [
     gps: "50.7694897N, 14.4848639E",
     img: "img/pre/PanskaSkala.webp",
   },
+  {
+    id: "JindrichuvHradec",
+    name: "Hrad a zámek Jindřichův Hradec",
+    gps: "49.1420006N, 15.0005483E",
+    img: "img/pre/JindrichuvHradec.webp",
+  },
+  {
+    id: "JindrichuvHradec",
+    name: "Hrad a zámek Jindřichův Hradec",
+    gps: "49.1420006N, 15.0005483E",
+    img: "img/pre/JindrichuvHradec.webp",
+  },
+  {
+    id: "Zitkova",
+    name: "Žítková",
+    gps: "48.9780700N, 17.8821319E",
+    img: "img/pre/Zitkova.webp",
+  },
+  {
+    id: "ArcheoparkPavlov",
+    name: "Archeopark Pavlov",
+    gps: "48.8774808N, 16.6749375E",
+    img: "img/pre/ArcheoparkPavlov.webp",
+  },
+  {
+    id: "Lednice",
+    name: "NPR Lednické rybníky, zámek",
+    gps: "48.8089253N, 16.8082742E",
+    img: "img/pre/Lednice.webp",
+  },
   // { id: "", name: "", gps: "", img: "img/..." },
 ];
