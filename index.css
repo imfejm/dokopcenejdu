@@ -37,6 +37,36 @@ H1 {
   padding: 5px 2rem;
 }
 
+/* banner s běžícím textem */
+.banner {
+  background-color: #50b9ad;
+  color: #0c0b05;
+  overflow: hidden;
+  white-space: nowrap;
+  font-family: Syne, sans-serif;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  padding: 0.5rem 0;
+}
+.banner-track {
+  display: inline-flex;
+  animation: marquee 15s linear infinite;
+}
+.banner-track span {
+  padding-right: 4rem;
+}
+@keyframes marquee {
+  to {
+    transform: translateX(-25%); /* 4 stejné kopie textu = plynulá smyčka */
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .banner-track {
+    animation-duration: 60s;
+  }
+}
+
 .hero {
   width: 100%;
   height: 80vh;
